@@ -1,0 +1,61 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:148.0) Gecko/20100101 Firefox/148.0" version="29.6.4">
+  <diagram name="Página-1" id="gTcwZyk_46KrAG6YtEBZ">
+    <mxGraphModel dx="1400" dy="-158" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-352" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;" value="CASO 3 — Boletim de Desgraças" vertex="1">
+          <mxGeometry height="40" width="700" x="63.99571428571426" y="1392.9966434151786" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-353" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Usuário clica&#xa;&#39;Boletim de Desgraças&#39;" vertex="1">
+          <mxGeometry height="50" width="200" x="313.99571428571426" y="1453.9966434151786" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-354" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Telegram: enviar aviso&#xa;&#39;Gerando Boletim...&#39;" vertex="1">
+          <mxGeometry height="50" width="200" x="313.99571428571426" y="1533.9966434151786" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-355" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="RSS Feed Reader&lt;br&gt;G1 Planeta Bizarro" vertex="1">
+          <mxGeometry height="60" width="200" x="313.99571428571426" y="1613.9966434151786" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-356" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Limit Node&#xa;máx. 50 itens" vertex="1">
+          <mxGeometry height="50" width="200" x="313.99571428571426" y="1703.9966434151784" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-357" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Code Node: mapear&#xa;título + link e montar&#xa;prompt para OpenAI" vertex="1">
+          <mxGeometry height="60" width="200" x="313.99571428571426" y="1783.9966434151784" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-358" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="OpenAI GPT-4o-mini:&#xa;selecionar 5 mais absurdas&#xa;+ comentário sarcástico (JSON)" vertex="1">
+          <mxGeometry height="60" width="200" x="313.99571428571426" y="1873.9966434151784" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-359" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Code Node: formatar&#xa;resposta em Markdown&#xa;Telegram" vertex="1">
+          <mxGeometry height="60" width="200" x="313.99571428571426" y="1963.9966434151784" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-360" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Telegram: enviar&#xa;boletim formatado&#xa;(títulos + links + comentários)" vertex="1">
+          <mxGeometry height="60" width="200" x="313.99571428571426" y="2053.9966434151784" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-361" parent="1" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=left;fontSize=11;fontStyle=2;" value="ℹ Status do usuário NÃO é alterado&#xa;Fluxo síncrono, sem estado." vertex="1">
+          <mxGeometry height="50" width="220" x="303.99571428571426" y="1319.9966434151784" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-362" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-353" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-354">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-363" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-354" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-355">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-364" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-355" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-356">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-365" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-356" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-357">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-366" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-357" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-358">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-367" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-358" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-359">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-368" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-359" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-360">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,184 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:148.0) Gecko/20100101 Firefox/148.0" version="29.6.4">
+  <diagram name="Página-1" id="gTcwZyk_46KrAG6YtEBZ">
+    <mxGraphModel dx="1202" dy="1300" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-32" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;" value="CASO 2 — Relato de Desastre Aéreo (Marcadores + Imagem)" vertex="1">
+          <mxGeometry height="40" width="800" x="1268" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-33" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Usuário clica&#xa;&#39;Relato do Desastre Aéreo&#39;" vertex="1">
+          <mxGeometry height="50" width="200" x="1550" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-34" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="OpenAI gera instruções&#xa;de envio (estilo Francesca)" vertex="1">
+          <mxGeometry height="50" width="200" x="1410" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-35" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Atualizar status&#xa;→ aguardando_caso2" vertex="1">
+          <mxGeometry height="50" width="200" x="1160" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-36" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Telegram: enviar&#xa;instruções ao usuário" vertex="1">
+          <mxGeometry height="50" width="200" x="1660" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-37" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Usuário envia mensagem" vertex="1">
+          <mxGeometry height="50" width="200" x="1410" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-38" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="É uma foto?" vertex="1">
+          <mxGeometry height="70" width="170" x="1425" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-39" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Verificar status na planilha&#xa;= aguardando_caso2?" vertex="1">
+          <mxGeometry height="70" width="200" x="1060" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-40" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="OpenAI: cobrar foto&#xa;de forma sarcástica&#xa;→ Telegram envia" vertex="1">
+          <mxGeometry height="60" width="200" x="1060" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-41" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Verificar status&#xa;= aguardando_caso2?" vertex="1">
+          <mxGeometry height="70" width="200" x="1660" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-42" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="OpenAI: resposta&#xa;&#39;foto não solicitada&#39;" vertex="1">
+          <mxGeometry height="60" width="200" x="1910" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-43" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Telegram: baixar foto&#xa;em maior resolução" vertex="1">
+          <mxGeometry height="50" width="200" x="1500" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-44" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Google Drive: fazer&#xa;upload da foto" vertex="1">
+          <mxGeometry height="50" width="200" x="1740" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-45" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Google Drive: tornar&#xa;foto pública" vertex="1">
+          <mxGeometry height="50" width="200" x="1980" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-46" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Parsear Dados Usuário&#xa;caption → text" vertex="1">
+          <mxGeometry height="50" width="200" x="1980" y="625" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-47" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="OpenAI: extrair campos&#xa;estruturados (JSON)&#xa;nome, endereço, tel..." vertex="1">
+          <mxGeometry height="60" width="200" x="1740" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-48" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="JS Code: parse JSON&#xa;dos campos extraídos" vertex="1">
+          <mxGeometry height="50" width="200" x="1500" y="625" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-49" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Google Drive: Copiar&#xa;Template_Caso2" vertex="1">
+          <mxGeometry height="50" width="200" x="1500" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-50" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Code Node: gerar&#xa;número de caso (timestamp)" vertex="1">
+          <mxGeometry height="50" width="200" x="1740" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-51" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Google Docs: replaceAll&#xa;&lt;&lt;nome&gt;&gt; &lt;&lt;endereco&gt;&gt; etc." vertex="1">
+          <mxGeometry height="50" width="200" x="1980" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-52" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" value="HTTP GET: buscar estrutura&#xa;JSON do documento&#xa;(localizar índice &lt;&lt;foto&gt;&gt;)" vertex="1">
+          <mxGeometry height="60" width="200" x="1980" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-53" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" value="Code Node: encontrar&#xa;startIndex / endIndex&#xa;do marcador &lt;&lt;foto&gt;&gt;" vertex="1">
+          <mxGeometry height="60" width="200" x="1740" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-54" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" value="HTTP POST batchUpdate:&#xa;1. deleteContentRange&#xa;2. insertInlineImage" vertex="1">
+          <mxGeometry height="60" width="200" x="1500" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-55" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Google Drive: baixar&#xa;documento como PDF" vertex="1">
+          <mxGeometry height="50" width="200" x="1500" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-56" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Google Drive: compartilhar&#xa;publicamente" vertex="1">
+          <mxGeometry height="50" width="200" x="1740" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-57" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Code Node: frase&#xa;aleatória de encerramento" vertex="1">
+          <mxGeometry height="50" width="200" x="1980" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-58" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Telegram: enviar link" vertex="1">
+          <mxGeometry height="50" width="200" x="2100" y="980" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-59" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Telegram: enviar PDF" vertex="1">
+          <mxGeometry height="50" width="200" x="1860" y="980" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-60" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Google Sheets:&#xa;resetar status → idle" vertex="1">
+          <mxGeometry height="50" width="200" x="1980" y="1070" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-61" parent="1" style="text;html=1;strokeColor=#b85450;fillColor=#f8cecc;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;fontSize=11;fontStyle=2;" value="⚠ DESAFIO TÉCNICO&#xa;n8n não tem nó nativo para injetar&#xa;imagens no Google Docs.&#xa;Solução: API bruta (batchUpdate)&#xa;com deleteContentRange +&#xa;insertInlineImage" vertex="1">
+          <mxGeometry height="120" width="250" x="2180" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-62" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-33" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-63" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-34" style="edgeStyle=orthogonalEdgeStyle;dashed=1;" target="r4Ct7xrvP7KFSZ4T6WUB-35" value="paralelo">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-64" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-34" style="edgeStyle=orthogonalEdgeStyle;dashed=1;" target="r4Ct7xrvP7KFSZ4T6WUB-36" value="paralelo">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-65" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-36" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-37">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-66" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-37" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-38">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-67" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-38" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-39" value="NÃO">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-68" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-38" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-41" value="SIM">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-69" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-39" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-40">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-70" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-41" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-42" value="NÃO">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-71" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-41" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-43" value="SIM">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-72" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-43" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-44">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-73" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-44" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-45">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-74" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-45" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-46">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-75" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-46" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-47">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-76" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-47" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-48">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-77" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-48" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-49">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-78" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-49" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-50">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-79" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-50" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-51">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-80" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-51" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-52">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-81" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-52" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-53">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-82" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-53" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-54">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-83" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-54" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-55">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-84" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-55" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-56">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-85" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-56" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-57">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-86" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-57" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-58">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-87" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-57" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-59">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-88" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-58" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-60">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4Ct7xrvP7KFSZ4T6WUB-89" edge="1" parent="1" source="r4Ct7xrvP7KFSZ4T6WUB-59" style="edgeStyle=orthogonalEdgeStyle;" target="r4Ct7xrvP7KFSZ4T6WUB-60">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
