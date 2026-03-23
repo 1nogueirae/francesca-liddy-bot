@@ -10,7 +10,7 @@ O bot assume a personalidade de **Francesca Liddy**, a secretária cínica e imp
 
 ## 📐 Arquitetura Macro
 
-![Arquitetura Macro](./assets/Arquitetura_Macro.jpg)
+![Arquitetura Macro](./assets/Arquitetura Macro.jpg)
 
 ---
 
