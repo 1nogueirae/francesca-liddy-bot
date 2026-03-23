@@ -1,0 +1,3340 @@
+{
+  "name": "Francesca Liddy",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message",
+          "callback_query"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1936,
+        624
+      ],
+      "id": "4865e0c1-e3bf-4f2b-adca-26efb04923bc",
+      "name": "Telegram Trigger",
+      "webhookId": "4a4450d9-1d00-4cdf-8b5e-34ebad05f1e9",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_TELEGRAM_CREDENTIAL_ID",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Parsear Dados Usuário').item.json.id }}",
+        "text": "={{ $json.output[0].content[0].text }}",
+        "replyMarkup": "inlineKeyboard",
+        "inlineKeyboard": {
+          "rows": [
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Gerar Notificação Extrajudicial",
+                    "additionalFields": {
+                      "callback_data": "caso1"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Relato do Desastre Aéreo",
+                    "additionalFields": {
+                      "callback_data": "caso2"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Boletim de Desgraças",
+                    "additionalFields": {
+                      "callback_data": "caso3"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Passar Escuta a Limpo",
+                    "additionalFields": {
+                      "callback_data": "caso4"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2208,
+        -96
+      ],
+      "id": "cc14238d-da1f-4afd-8f2e-49dca3f61c8c",
+      "name": "Mostrar Botões",
+      "webhookId": "1d32a4ef-4fd1-4134-a341-a9ae26c17e54",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_TELEGRAM_CREDENTIAL_ID",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "role": "system",
+              "content": "Você é um classificador de intenção. Seu trabalho é identificar o tipo de mensagem que chegou.\n\nTrês categorias apenas:\n- saudacao: oi, olá, tudo bem?, oi bot, teste inicial, etc\n- duvida: pergunta sobre botões, recursos, funcionamento, próximos passos\n- bobeira: conversa fiada, conteúdo aleatório, \"manda algo aí\", \"kkk\", mensagens sem propósito\n\nÚNICO formato de saída (sem exceções):\n{\"intencao\":\"saudacao\"} ou {\"intencao\":\"duvida\"} ou {\"intencao\":\"bobeira\"}\n\nSem markdown, sem explicações, sem texto extra.\nSe não souber, chute duvida."
+            },
+            {
+              "content": "={{ $('Parsear Dados Usuário').item.json.text }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        1184,
+        -112
+      ],
+      "id": "2129b425-43f8-4c11-abdc-6aeeb4e0d2ff",
+      "name": "Classificador",
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "role": "system",
+              "content": "Você é Francesca Liddy, secretária cínica e impaciente do advogado Saul Goodman. Você odeia perder tempo e tem uma língua afiada, mas é profissional na resposta.\n\nResponda em 2-3 frases curtas:\n- Primeira frase: se identifique como Francesca do escritório do Saul Goodman, com certa irritação\n- Tom: seco, cínico, sem calorismo\n- Última frase: mande o usuário escolher uma opção nos botões com urgência\n- Não mencione nomes dos botões, não use listas, linguagem coloquial, um só parágrafo"
+            },
+            {
+              "content": "={{ $('Parsear Dados Usuário').item.json.text }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {
+          "maxTokens": 150
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        1888,
+        -240
+      ],
+      "id": "e27d2d3e-7626-4230-a7a6-6958f34f819d",
+      "name": "Apresentação Francesca",
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "role": "system",
+              "content": "Você é Francesca Liddy, secretária cínica, sobrecarregada e impaciente do advogado Saul Goodman. O telefone não para de tocar, você está puta da vida, mas responde porque é profissional.\n\nO usuário fez uma pergunta. Responda com cinismo, raiva controlada e brevidade. Aqui está o que você sabe:\n- Voo 515 (Wayfarer): desastre aéreo em Albuquerque. Choveu destroços e pedaços de gente. Sr. Goodman está processando a maldita companhia.\n- Saul/Jimmy/Walter/Mike: você não é babá de ninguém. Você só agenda coisas. Seja evasiva, irritada.\n- Botões que você oferece: \n  • Gerar Notificação Extrajudicial = gera um PDF de ameaça no papel timbrado\n  • Relato do Desastre Aéreo = preenche ficha com foto dos destroços\n  • Boletim de Desgraças = puxa as piores manchetes de um portal de notícias\n  • Passar Escuta a Limpo = transcreve áudios de escuta clandestina\n\nResponda em UM parágrafo fluido, como se estivesse falando pra alguém no corredor. Sem listas, sem markdown. A última frase SEMPRE manda o usuário parar de perder seu tempo e clicar em um botão."
+            },
+            {
+              "content": "={{ $('Parsear Dados Usuário').item.json.text }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {
+          "maxTokens": 150
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        1888,
+        -112
+      ],
+      "id": "aa5439bd-3504-4e78-8294-9bbe7bdcb40e",
+      "name": "Tirando Dúvida",
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "role": "system",
+              "content": "Você é Francesca Liddy. O telefone não para, você tem mais o que fazer, e acabou de ler uma mensagem completamente inútil.\n\nSeu trabalho: cortar a conversa fiada de forma seca, rápida e irritada. 2-3 frases, máximo. Nada de listas, nada de explicações. Tipo falando pro lado enquanto atende 5 ligações.\n\nMostre que você não tem paciência. Cite coisas que você tá fazendo de verdade (telefones tocando, policiais na sala, papelada do voo 515, etc)."
+            },
+            {
+              "content": "={{ $('Parsear Dados Usuário').item.json.text }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {
+          "maxTokens": 150
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        1888,
+        16
+      ],
+      "id": "b04cb71b-1a64-49ff-8008-482ce683493f",
+      "name": "Respondendo Bobeira",
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "\nlet iaResponse = $input.first().json.output[0].content[0].text\n\n\niaResponse = iaResponse.replace(/```json/g, \"\").replace(/```/g, \"\").trim();\n\ntry {\n  const parsedData = JSON.parse(iaResponse);\n  \n  return {\n    json: parsedData\n  };\n} catch (error) {\n\n  return {\n    json: {\n      \"intencao\": \"erro_de_leitura\",\n      \"raw_response\": iaResponse\n    }\n  };\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1504,
+        -112
+      ],
+      "id": "4c8f7741-7e3a-429d-9856-ad8855a4dd93",
+      "name": "Parser Classificação"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Parsear Dados Usuário').item.json.type }}",
+                    "rightValue": "texto",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "08f54597-cb74-41e7-b8c4-a60f8876fab5"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Texto"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "c247b84c-d79c-44fd-9222-e0365d59e98b",
+                    "leftValue": "={{ $('Parsear Dados Usuário').item.json.type }}",
+                    "rightValue": "botao",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Botao"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        464,
+        464
+      ],
+      "id": "44e1dd97-2e58-4652-bab3-91cbc9417b0e",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_SPREADSHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Controle de Estados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "estados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "chat_id",
+              "lookupValue": "={{ $json.id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -368,
+        576
+      ],
+      "id": "c03a1f88-b721-4cf7-8f64-6df324f2ec62",
+      "name": "Verificar ID na planilha",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GOOGLE_SHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_SPREADSHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Controle de Estados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "estados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "chat_id": "={{ $('Parsear Dados Usuário').item.json.id }}",
+            "status": "idle",
+            "updated_at": "={{ new Date().toISOString() }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "chat_id",
+              "displayName": "chat_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "updated_at",
+              "displayName": "updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        176,
+        416
+      ],
+      "id": "af8c7823-1485-4a9a-b3fe-9b14dcf0df79",
+      "name": "Cadasatra na Planilha",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GOOGLE_SHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "7f99c816-c2c0-420a-8678-3f32887120f2",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "idle",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        176,
+        672
+      ],
+      "id": "9904ad67-a4c2-4165-a762-a07aaddc482a",
+      "name": "Verifica Status Idle"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.status }}",
+                    "rightValue": "aguardando_caso1",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "ecb0e0b5-d6c3-4b03-afdc-1194e78d23d0"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "ac0dbed2-b2ce-4468-9cc8-e5455296d740",
+                    "leftValue": "={{ $json.status }}",
+                    "rightValue": "aguardando_caso2",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "8ff33347-7580-42d1-89c1-bb41ad45132a",
+                    "leftValue": "={{ $json.status }}",
+                    "rightValue": "aguardando_audio",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        480,
+        1296
+      ],
+      "id": "ec85b7d4-97d9-47c5-a2ea-8ac937a16f3a",
+      "name": "Continuar Casos"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "Você é Francesca Liddy. Um cliente quer gerar uma notificação extrajudicial.\n\nSeu trabalho: pedir o texto que vai entrar no documento. Direto. Sem explicações, sem perguntas adicionais, sem contexto. Só o conteúdo da ameaça mesmo.\n\n1-2 frases, seca e impaciente. Um parágrafo. Linguagem coloquial, tom de \"eu não tenho tempo pra isso\"."
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {
+          "maxTokens": 150
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        1184,
+        336
+      ],
+      "id": "8b7bcb4f-7eba-4c20-84c4-21eb87118325",
+      "name": "Solicitando conteúdo Notificação Extrajudicial",
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_SPREADSHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Controle de Estados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "estados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "status": "idle",
+            "chat_id": "={{ $('Parsear Dados Usuário').item.json.id }}",
+            "updated_at": "={{ new Date().toISOString() }}"
+          },
+          "matchingColumns": [
+            "chat_id"
+          ],
+          "schema": [
+            {
+              "id": "chat_id",
+              "displayName": "chat_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "updated_at",
+              "displayName": "updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3696,
+        1488
+      ],
+      "id": "e275a8d8-f41a-4465-86e6-21e299b3422a",
+      "name": "Atualizar Status para Idle",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GOOGLE_SHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "Você é Francesca Liddy, secretária do Saul Goodman. Um cliente quer registrar danos do voo 515 (Wayfarer).\n\nSeu trabalho: explicar como enviar as informações. Mantenha tom profissional-sério (isso é negócio sério), mas COM A PERSONALIDADE DELA. Seca, impaciente, nada de saudações bobas.\n\nO cliente deve enviar:\n- Uma foto dos destroços + legenda com TODOS os dados na legenda da foto\n- Nome completo, endereço, telefone, local exato do impacto, resumo do ocorrido, bens danificados\n- Tudo numa única mensagem. Sem áudio, sem separar, sem incompleto. Tudo junto ou será ignorado.\n\nPode ser mais direta e com tom de \"você tá wasting my time com qualquer coisa errada\". Sem emojis. Parágrafo único."
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {
+          "maxTokens": 150
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        1184,
+        464
+      ],
+      "id": "750d9ca3-0880-4825-92ce-41c1d436fd26",
+      "name": "Solicitando conteúdo Desastre Aéreo",
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_SPREADSHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Controle de Estados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "estados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "status": "aguardando_caso1",
+            "chat_id": "={{ $('Parsear Dados Usuário').item.json.id }}",
+            "updated_at": "={{ new Date().toISOString() }}"
+          },
+          "matchingColumns": [
+            "chat_id"
+          ],
+          "schema": [
+            {
+              "id": "chat_id",
+              "displayName": "chat_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "updated_at",
+              "displayName": "updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1472,
+        176
+      ],
+      "id": "28acb0db-8c95-4640-a66f-e9caa449c9e3",
+      "name": "Atualizar Status para aguardando_caso1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GOOGLE_SHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "d8aafcb8-e296-4508-952f-f5d8c733228d",
+              "leftValue": "={{ Object.keys($json).length === 0 }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -176,
+        576
+      ],
+      "id": "2ad0d1e0-04ae-463d-ad37-14257fb4b422",
+      "name": "If ID não está na planilha"
+    },
+    {
+      "parameters": {
+        "jsCode": "let texto = \"\";\nlet chatId;\nlet type;\nconst triggerData = $('Telegram Trigger').first().json;\n\n// Verifica se é um callback_query (botão inline)\nif (triggerData.callback_query) {\n  chatId = triggerData.callback_query.from.id;\n  texto = triggerData.callback_query.data ?? \"\";\n  type = \"botao\";\n\n} else {\n  chatId = triggerData.message.from.id;\n\n  // Verifica se é uma foto\n  if (triggerData.message.photo) {\n    type = \"foto\";\n    texto = triggerData.message.caption ?? \"\";\n\n  } else {\n    // Fluxo original: mensagem de texto ou áudio transcrito\n    type = \"texto\";\n    try {\n      const transcribe = $('Transcrever Audio').all();\n      if (transcribe.length > 0) {\n        texto = transcribe[0].json.text;\n      }\n    } catch (e) {}\n\n    if (!texto) {\n      try {\n        const telegram = $('Telegram Trigger').all();\n        if (telegram.length > 0) {\n          texto = telegram[0].json.message.text ?? \"\";\n        }\n      } catch (e) {}\n    }\n  }\n}\n\nreturn [\n  {\n    json: {\n      id: chatId,\n      text: texto,\n      type: type\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -560,
+        576
+      ],
+      "id": "a8abcf2e-2996-4688-ac53-cb4b849590d7",
+      "name": "Parsear Dados Usuário"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $('Copiar Template 2').item.json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "replaceAll",
+              "text": "<<nome>>",
+              "replaceText": "={{ $('Parsear Dados do Relato').item.json.nome_completo }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "<<endereco>>",
+              "replaceText": "={{ $('Parsear Dados do Relato').item.json.endereco }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "<<telefone>>",
+              "replaceText": "={{ $('Parsear Dados do Relato').item.json.telefone }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "<<local_impacto>>",
+              "replaceText": "={{ $('Parsear Dados do Relato').item.json.local_do_impacto }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "<<resumo_incidente>>",
+              "replaceText": "={{ $('Parsear Dados do Relato').item.json.resumo_do_ocorrido }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "<<bens_danificados>>",
+              "replaceText": "={{ Array.isArray($('Parsear Dados do Relato').item.json.bens_danificados)     ? $('Parsear Dados do Relato').item.json.bens_danificados.join(', ')     : $('Parsear Dados do Relato').item.json.bens_danificados }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "<<numero_caso>>",
+              "replaceText": "={{ $json.caseNumber }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "<<data_registro>>",
+              "replaceText": "={{ new Date().toLocaleDateString('pt-BR', {day:'2-digit', month:'2-digit', year:'2-digit'}) }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        1968,
+        1488
+      ],
+      "id": "09de6892-c6b6-4bc7-8a39-3c4a9442cfc1",
+      "name": "Preencher Relato",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "YOUR_GOOGLE_DOCS_CREDENTIAL_ID",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "copy",
+        "fileId": {
+          "__rl": true,
+          "value": "1J4G3cSWGt4NSJDoWE7Hz_rDxHRXSDMWpswdTFbRrdso",
+          "mode": "list",
+          "cachedResultName": "Template_Caso1",
+          "cachedResultUrl": "https://docs.google.com/document/d/1J4G3cSWGt4NSJDoWE7Hz_rDxHRXSDMWpswdTFbRrdso/edit?usp=drivesdk"
+        },
+        "name": "=Notificação_Extrajudicial_de_{{ $('Telegram Trigger').item.json.message?.from?.first_name ?? $('Telegram Trigger').item.json.callback_query?.from?.first_name }}",
+        "sameFolder": false,
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1WzIWmMbaD66LQnFNaUk73DNjhVVYThlh",
+          "mode": "list",
+          "cachedResultName": "Notificações Extrajudiciais",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1WzIWmMbaD66LQnFNaUk73DNjhVVYThlh"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1168,
+        1280
+      ],
+      "id": "3229ea5f-f82d-493e-aca2-ec3d91451bde",
+      "name": "Copiar Template 1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "YOUR_GOOGLE_DRIVE_CREDENTIAL_ID",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.documentId }}",
+          "mode": "id"
+        },
+        "options": {
+          "googleFileConversion": {
+            "conversion": {
+              "docsToFormat": "application/pdf",
+              "drawingsToFormat": "application/pdf",
+              "slidesToFormat": "application/pdf",
+              "sheetsToFormat": "application/pdf"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1488,
+        1280
+      ],
+      "id": "0465edc5-1d19-41ca-aa3f-be4c2bb98595",
+      "name": "Baixar Notificacao Extrajudicial",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "YOUR_GOOGLE_DRIVE_CREDENTIAL_ID",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "replaceAll",
+              "text": "<<texto>>",
+              "replaceText": "={{ $('Parsear Dados Usuário').item.json.text }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        1328,
+        1280
+      ],
+      "id": "a384b137-558f-4086-ad7c-9f71d20617de",
+      "name": "Atualizar Notificacao Extrajudicial",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "YOUR_GOOGLE_DOCS_CREDENTIAL_ID",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Copiar Template 1').item.json.id }}",
+          "mode": "id"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "reader",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1664,
+        1280
+      ],
+      "id": "0d6c01a2-447c-454a-a42a-6d2fa0db0a66",
+      "name": "Compartilhar Notificacao Extrajudicial",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "YOUR_GOOGLE_DRIVE_CREDENTIAL_ID",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const frases = [\n  \"Notificação gerada. Espero que a outra parte chore bastante.\",\n  \"Pronto. Mais um que vai receber um susto no correio.\",\n  \"Documento enviado. O Saul ia cobrar o triplo por isso.\",\n  \"Feito. Agora é só sentar e esperar o desespero alheio.\",\n  \"Notificação extrajudicial pronta. Isso nunca termina bem pra quem recebe.\"\n];\n\nconst aleatoria = frases[Math.floor(Math.random() * frases.length)];\n\nreturn [\n  {\n    json: {\n      texto: aleatoria\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1840,
+        1280
+      ],
+      "id": "c30ff538-64e8-479a-855d-c85a695c99b5",
+      "name": "Frase Aleatoria Notificacao Extrajudicial"
+    },
+    {
+      "parameters": {
+        "operation": "sendDocument",
+        "chatId": "={{ $('Parsear Dados Usuário').item.json.id }}",
+        "binaryData": true,
+        "binaryPropertyName": "={{ $('Baixar Notificacao Extrajudicial').item.binary.data }}",
+        "additionalFields": {
+          "fileName": "={{ $('Copiar Template 1').item.json.name }}.pdf"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2192,
+        1280
+      ],
+      "id": "a073c172-6033-45fc-ab04-fa1781289697",
+      "name": "Enviar Documento Notificacao Extrajudicial",
+      "webhookId": "0d84776c-9451-4a5a-9e21-6f359ac9e04d",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_TELEGRAM_CREDENTIAL_ID",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Parsear Dados Usuário').item.json.id }}",
+        "text": "={{ $json.texto + '\\n' + 'https://drive.google.com/file/d/' + $('Copiar Template 1').item.json.id.toString().replace(/_/g, '\\\\_') + '/view' }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2016,
+        1280
+      ],
+      "id": "80e2b981-b05f-40e0-b26f-3a77e598e096",
+      "name": "Enviar Link Notificacao Extrajudicial",
+      "webhookId": "0cb2e705-0cd0-4c7b-8257-6607d149fbf7",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_TELEGRAM_CREDENTIAL_ID",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const texto = $input.first().json.output[0].content[0].text;\nconst limpo = texto.replace(/```json|```/gi, '').trim();\n\ntry {\n  const dados = JSON.parse(limpo);\n  return [{ json: dados }];\n} catch (error) {\n  return [{\n    json: {\n      nome_completo: \"Erro de leitura\",\n      endereco: \"Não informado\",\n      telefone: \"Não informado\",\n      local_do_impacto: \"Não informado\",\n      resumo_do_ocorrido: \"Não informado\",\n      bens_danificados: [\"Não informado\"],\n      descricao_do_destroco: \"Não informado\"\n    }\n  }];\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        1488
+      ],
+      "id": "099dda0d-ff8a-44af-8a2b-af9c37a5c15e",
+      "name": "Parsear Dados do Relato"
+    },
+    {
+      "parameters": {
+        "operation": "copy",
+        "fileId": {
+          "__rl": true,
+          "value": "1nFSRW1udiQbElexXxxY5BmJf6tx2tj11FwcyNhUoFug",
+          "mode": "list",
+          "cachedResultName": "Template_Caso2",
+          "cachedResultUrl": "https://docs.google.com/document/d/1nFSRW1udiQbElexXxxY5BmJf6tx2tj11FwcyNhUoFug/edit?usp=drivesdk"
+        },
+        "name": "=Relato_de_{{ $('Telegram Trigger').item.json.message?.from?.first_name ?? $('Telegram Trigger').item.json.callback_query?.from?.first_name }}\n\n",
+        "sameFolder": false,
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1ixCXqnCUjlNTYj-tsqT0rE-XT426mOG6",
+          "mode": "list",
+          "cachedResultName": "Relatos de Desastres Aéreos",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1ixCXqnCUjlNTYj-tsqT0rE-XT426mOG6"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1616,
+        1488
+      ],
+      "id": "fcc2dc22-8250-4810-bb7e-30c458ab0835",
+      "name": "Copiar Template 2",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "YOUR_GOOGLE_DRIVE_CREDENTIAL_ID",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const frases = [\n  \"Boletim registrado. Mais um capítulo trágico da sua vida documentado.\",\n  \"Pronto. O prejuízo tá no papel, agora vamos atrás do ressarcimento.\",\n  \"Relato gerado. Saul agradece por contribuir no processo daqueles panacas.\",\n  \"Documento do desastre pronto. Boa sorte, vai precisar.\",\n  \"Feito. O Saul diria que você tem um talento especial pra se meter em confusão.\"\n];\n\nconst aleatoria = frases[Math.floor(Math.random() * frases.length)];\n\nreturn [\n  {\n    json: {\n      texto: aleatoria\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2976,
+        1488
+      ],
+      "id": "301cf6c9-b40c-476d-975e-f75ed4b53b08",
+      "name": "Frase Aleatoria Relato"
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Copiar Template 2').item.json.id }}",
+          "mode": "id"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "reader",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2800,
+        1488
+      ],
+      "id": "613f9a7b-2e35-420c-94c4-7a57c8333a52",
+      "name": "Compartilhar Relato",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "YOUR_GOOGLE_DRIVE_CREDENTIAL_ID",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Copiar Template 2').item.json.id }}",
+          "mode": "id"
+        },
+        "options": {
+          "googleFileConversion": {
+            "conversion": {
+              "docsToFormat": "application/pdf",
+              "drawingsToFormat": "application/pdf",
+              "slidesToFormat": "application/pdf",
+              "sheetsToFormat": "application/pdf"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2640,
+        1488
+      ],
+      "id": "93e8a158-0c1e-452f-9aee-820747af4e51",
+      "name": "Baixar Relato",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "YOUR_GOOGLE_DRIVE_CREDENTIAL_ID",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Parsear Dados Usuário').item.json.id }}",
+        "text": "={{ $json.texto + '\\n' + 'https://drive.google.com/file/d/' + $('Copiar Template 2').item.json.id.toString().replace(/_/g, '\\\\_') + '/view' }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        3168,
+        1488
+      ],
+      "id": "e96b01c6-6255-4945-9b9a-3df1d4e4edf6",
+      "name": "Enviar Link Relato",
+      "webhookId": "40f0ab96-3f83-47b1-8dfc-33d02a00d407",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_TELEGRAM_CREDENTIAL_ID",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendDocument",
+        "chatId": "={{ $('Parsear Dados Usuário').item.json.id }}",
+        "binaryData": true,
+        "binaryPropertyName": "={{ $('Baixar Relato').item.binary.data }}",
+        "additionalFields": {
+          "fileName": "={{ $('Copiar Template 2').item.json.name }}.pdf"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        3376,
+        1488
+      ],
+      "id": "6b4f7884-cc87-4738-8cbb-a4b2534a1e82",
+      "name": "Enviar Documento Relato",
+      "webhookId": "5d8f2cbf-bad3-4a9f-a0dd-fa0bd895a7f8",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_TELEGRAM_CREDENTIAL_ID",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_SPREADSHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Controle de Estados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "estados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "chat_id",
+              "lookupValue": "={{ $('Telegram Trigger').item.json.message.chat.id }}"
+            },
+            {
+              "lookupColumn": "status",
+              "lookupValue": "aguardando_caso2"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1568,
+        1008
+      ],
+      "id": "fdfaa6be-25a4-46a0-84ce-e98bcc410b32",
+      "name": "Verificar Status User na Planilha",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GOOGLE_SHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.output[0].content[0].text }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -928,
+        1152
+      ],
+      "id": "455707ca-8bee-44c6-bd5d-1a9f8760a920",
+      "name": "Ignorar Foto",
+      "webhookId": "3dbbb961-79e4-4955-b821-f57bf9b7e58a",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_TELEGRAM_CREDENTIAL_ID",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_SPREADSHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Controle de Estados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "estados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "status": "aguardando_caso2",
+            "chat_id": "={{ $('Telegram Trigger').item.json.callback_query.from.id }}",
+            "updated_at": "={{ new Date().toISOString() }}"
+          },
+          "matchingColumns": [
+            "chat_id"
+          ],
+          "schema": [
+            {
+              "id": "chat_id",
+              "displayName": "chat_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "updated_at",
+              "displayName": "updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1712,
+        736
+      ],
+      "id": "aad2f313-16bf-4af4-b784-a6428b9aaf41",
+      "name": "Atualizar Status para aguardando_caso2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GOOGLE_SHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "d8aafcb8-e296-4508-952f-f5d8c733228d",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "aguardando_caso2",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1424,
+        1008
+      ],
+      "id": "f62e01f6-1080-450c-a825-3ce66fd2a1f4",
+      "name": "If Status aguardando_caso2"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $('Telegram Trigger').item.json.message.photo.slice(-1)[0].file_id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1296,
+        880
+      ],
+      "id": "1d215937-72c4-47f4-b9c6-aa958da85ff0",
+      "name": "Baixar Foto",
+      "webhookId": "d3b889fc-e304-4610-87eb-4459f12d9a0c",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_TELEGRAM_CREDENTIAL_ID",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "={{ $('Telegram Trigger').item.json.message.photo.slice(-1)[0].file_unique_id }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1ca2dyCYVbh0QVTyerfCRREaaHlLH8mS8",
+          "mode": "list",
+          "cachedResultName": "Fotos Recebidas",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1ca2dyCYVbh0QVTyerfCRREaaHlLH8mS8"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1152,
+        880
+      ],
+      "id": "f9236a22-6d0b-4dc4-b15b-50e97ff55f62",
+      "name": "Upar Foto",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "YOUR_GOOGLE_DRIVE_CREDENTIAL_ID",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body.content;\n\nconst PLACEHOLDER = '<<foto>>';\nlet startIndex = null;\n\nfor (const element of body) {\n  if (!element.paragraph) continue;\n  \n  for (const el of element.paragraph.elements) {\n    if (el.textRun && el.textRun.content.includes(PLACEHOLDER)) {\n      const offsetDentroDoRun = el.textRun.content.indexOf(PLACEHOLDER);\n      startIndex = el.startIndex + offsetDentroDoRun;\n      break;\n    }\n  }\n  \n  if (startIndex !== null) break;\n}\n\nif (startIndex === null) throw new Error('Placeholder <<foto>> não encontrado no documento');\n\nreturn [{ json: { startIndex, endIndex: startIndex + PLACEHOLDER.length } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2304,
+        1488
+      ],
+      "id": "5d5fe6a2-32ff-4c07-99ab-4bd6910226a1",
+      "name": "Parsear Documento"
+    },
+    {
+      "parameters": {
+        "url": "=https://docs.googleapis.com/v1/documents/{{ $('Copiar Template 2').item.json.id }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDocsOAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        2144,
+        1488
+      ],
+      "id": "a1294833-c7ef-460b-8810-28263e02de95",
+      "name": "GET Conteudo Relato",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "YOUR_GOOGLE_DOCS_CREDENTIAL_ID",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://docs.googleapis.com/v1/documents/{{ $('Copiar Template 2').item.json.id }}:batchUpdate",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDocsOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"requests\": [\n    {\n      \"deleteContentRange\": {\n        \"range\": {\n          \"startIndex\": {{ $('Parsear Documento').item.json.startIndex }},\n          \"endIndex\": {{ $('Parsear Documento').item.json.endIndex }}\n        }\n      }\n    },\n    {\n      \"insertInlineImage\": {\n        \"location\": {\n          \"index\": {{ $('Parsear Documento').item.json.startIndex }}\n        },\n        \"uri\": \"https://drive.google.com/uc?export=download&id={{ $('Upar Foto').item.json.id }}\",\n        \"objectSize\": {\n          \"height\": { \"magnitude\": 200, \"unit\": \"PT\" },\n          \"width\": { \"magnitude\": 300, \"unit\": \"PT\" }\n        }\n      }\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        2464,
+        1488
+      ],
+      "id": "055af102-777f-451d-81a9-f381c8ae4b11",
+      "name": "Inserir Foto no Documento",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "YOUR_GOOGLE_DOCS_CREDENTIAL_ID",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "reader",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1008,
+        880
+      ],
+      "id": "08557d3c-2785-43d6-b923-6b6994e2a14a",
+      "name": "Tornar Foto Publica",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "YOUR_GOOGLE_DRIVE_CREDENTIAL_ID",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://g1.globo.com/rss/g1/planeta-bizarro/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        1296,
+        1088
+      ],
+      "id": "f243021a-4b1b-44f3-bac0-843fc04759d5",
+      "name": "Ler G1"
+    },
+    {
+      "parameters": {
+        "maxItems": 50
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        1472,
+        1088
+      ],
+      "id": "86783289-ccb2-48e0-ab28-86c7a7f0b067",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "jsCode": "const noticias = items.map(item => ({\n  title: item.json.title,\n  link: item.json.link\n})).filter(n => n.title);\n\nconst listaFormatada = noticias\n  .map((n, i) => `${i + 1}. ${n.title}\\nLink: ${n.link}`)\n  .join('\\n\\n');\n\nconst prompt = `Você é Francesca Liddy, a secretária de Saul Goodman do seriado Breaking Bad. Você é sarcástica, irônica e direta. Você é profissional por fora, mas por dentro morre de rir das desgraças alheias e tem uma língua afiada.\n\nAnalise os títulos de notícias abaixo, escolha os 5 mais cômicos, absurdos ou involuntariamente engraçados, e escreva um comentário curto e ácido sobre cada um, como se estivesse falando baixinho pro Jimmy McGill no corredor.\n\nNotícias:\n${listaFormatada}\n\nResponda SOMENTE com JSON válido, sem markdown, sem texto extra:\n{\n  \"mensagem\": [\n    { \"titulo\": \"título da notícia\", \"link\": \"url aqui\", \"comentario\": \"comentário da Francesca\" },\n    { \"titulo\": \"título da notícia\", \"link\": \"url aqui\", \"comentario\": \"comentário da Francesca\" },\n    { \"titulo\": \"título da notícia\", \"link\": \"url aqui\", \"comentario\": \"comentário da Francesca\" },\n    { \"titulo\": \"título da notícia\", \"link\": \"url aqui\", \"comentario\": \"comentário da Francesca\" },\n    { \"titulo\": \"título da notícia\", \"link\": \"url aqui\", \"comentario\": \"comentário da Francesca\" }\n  ]\n}`;\n\nreturn [{ json: { prompt } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1680,
+        1088
+      ],
+      "id": "b9a80a52-28da-4f5a-8d4a-34ed8744736c",
+      "name": "Gerar títulos e Prompt"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "={{ $json.prompt.toString() }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        1888,
+        1088
+      ],
+      "id": "d110d6eb-2cba-4958-8c35-5611e9283106",
+      "name": "Filtrar Noticias",
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const resposta = $input.first().json.output[0].content[0].text\n\nconst clean = resposta.replace(/```json|```/g, '').trim();\nconst dados = JSON.parse(clean);\n\nconst texto = dados.mensagem.map((item, i) =>\n  `*${i + 1}. ${item.titulo}*\\n_${item.comentario}_\\n🔗 ${item.link}`\n).join('\\n\\n');\n\nreturn [{ json: { mensagem_final: texto } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2240,
+        1088
+      ],
+      "id": "442c74fb-8e1a-438b-86d7-b650936bbcff",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Parsear Dados Usuário').item.json.id }}",
+        "text": "={{ $json.mensagem_final }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2448,
+        1088
+      ],
+      "id": "1420cc73-1c54-4339-91be-70ab00e12262",
+      "name": "Enviar Boletim de Desgracas",
+      "webhookId": "fcaa0b28-acab-475d-a084-29ba0e77b1fe",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_TELEGRAM_CREDENTIAL_ID",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.callback_query.from.id }}",
+        "text": "={{ $json.output[0].content[0].text }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1584,
+        464
+      ],
+      "id": "57cda13d-5635-4010-a860-4554b69fdf12",
+      "name": "Enviar Solicitacao de Conteudo",
+      "webhookId": "e703981e-2fb7-46e9-b322-ebd964a4ec9c",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_TELEGRAM_CREDENTIAL_ID",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "Você é Francesca Liddy. Um cliente quer passar um áudio clandestino (de um grampo) por escrito.\n\nSeu trabalho: pedir o áudio. Direto. Profissional-sério (porque é coisa séria mesmo), mas COM a personalidade dela: seca, impaciente, sem paciência pra besteira.\n\nSe mandar texto em vez de áudio: você ignora e come o drama.\nSem emojis, sem bla bla bla. Uma ou duas frases."
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {
+          "maxTokens": 150
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        1184,
+        592
+      ],
+      "id": "e3ceef6d-c081-4df9-a246-4a4e2b508dca",
+      "name": "Solicitando áudio para transcrição",
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_SPREADSHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Controle de Estados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "estados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "status": "aguardando_audio",
+            "chat_id": "={{ $('Telegram Trigger').item.json.callback_query.from.id }}",
+            "updated_at": "={{ new Date().toISOString() }}"
+          },
+          "matchingColumns": [
+            "chat_id"
+          ],
+          "schema": [
+            {
+              "id": "chat_id",
+              "displayName": "chat_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "updated_at",
+              "displayName": "updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1472,
+        736
+      ],
+      "id": "c274c4ca-499f-4ef0-8b93-80a6fc4a8ba6",
+      "name": "Atualizar Status para aguardando_audio",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GOOGLE_SHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Parsear Dados Usuário').item.json.id }}",
+        "text": "=Aqui seu áudio transcrito:  {{ $('Transcrever Audio').item.json.text }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1184,
+        1936
+      ],
+      "id": "929a9912-5ab7-4f7f-9b53-9f8aeb50ff50",
+      "name": "Enviar Transcricao de áudio",
+      "webhookId": "4affd7a0-1173-4a8f-b529-d0b394732f41",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_TELEGRAM_CREDENTIAL_ID",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const chatId = $('Parsear Dados Usuário').first().json.id;\nconst timestamp = Date.now();\nconst caseNumber = `${chatId}-${timestamp}`;\n\nreturn [{ json: { caseNumber } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1792,
+        1488
+      ],
+      "id": "3a29a1fd-6590-4ae3-87b0-2676fdeaf415",
+      "name": "Gerar Numero de Caso"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "={{ $('Parsear Dados Usuário').item.json.text }}"
+            },
+            {
+              "role": "system",
+              "content": "Você é um assistente de triagem de sinistros. Extraia informações de relatos enviados por usuários (texto ou transcrição de áudio) e devolva um JSON estruturado.\n\nCampos obrigatórios de saída (NÃO altere os nomes):\n- nome_completo\n- endereco\n- telefone\n- local_do_impacto\n- resumo_do_ocorrido\n- bens_danificados\n- descricao_do_destroco\n\nRegras obrigatórias:\n1. Responda APENAS com JSON válido. Sem markdown, sem explicações, sem texto extra.\n2. Se qualquer campo não for mencionado, preencha com \"Não informado\".\n3. bens_danificados deve ser sempre um array de strings.\n4. Se não houver bens_danificados explícitos, use [\"Não informado\"].\n5. Normalize telefone removendo espaços desnecessários, preservando pontuação e DDD quando existirem no texto original.\n6. NUNCA INVENTE INFORMAÇÕES.\n\nFormato de saída obrigatório:\n{\"nome_completo\":\"...\",\"endereco\":\"...\",\"telefone\":\"...\",\"local_do_impacto\":\"...\",\"resumo_do_ocorrido\":\"...\",\"bens_danificados\":[\"...\"],\"descricao_do_destroco\":\"...\"}\n\nExemplo:\n{\"nome_completo\":\"Roberto Alves de Souza\",\"endereco\":\"Avenida Salgado Filho, 1500, apartamento 302\",\"telefone\":\"84988776655\",\"local_do_impacto\":\"Estacionamento do prédio\",\"resumo_do_ocorrido\":\"Uma placa metálica caiu do céu e atingiu o veículo estacionado em vaga descoberta.\",\"bens_danificados\":[\"capô\",\"para-brisa\",\"motor do veículo\"],\"descricao_do_destroco\":\"Parece ser uma escotilha de inspeção ou parte da carenagem de uma turbina.\"}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        1168,
+        1488
+      ],
+      "id": "4a73151f-1a43-41ca-b890-f75c502cbefd",
+      "name": "Identificar Campos",
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Parsear Dados Usuário').item.json.id }}",
+        "text": "Gerando seu Boletim de Desgraças...",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1168,
+        1088
+      ],
+      "id": "79f5b695-685b-49a4-99d8-f45c1848fb38",
+      "name": "Informar Geracao de Boletim",
+      "webhookId": "ab347175-3a31-47fe-a449-edd112ef635c",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_TELEGRAM_CREDENTIAL_ID",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $json.message.voice?.file_id ?? $json.message.audio?.file_id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1568,
+        352
+      ],
+      "id": "66f1f54b-9445-4f1c-9777-1fb21ba5108b",
+      "name": "Baixar Audio",
+      "webhookId": "c4782b12-a0fe-4fab-abf8-01cc310c4086",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_TELEGRAM_CREDENTIAL_ID",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        -1408,
+        352
+      ],
+      "id": "c9a422f0-1ad7-4d41-ab2a-a52a78cbd2b5",
+      "name": "Transcrever Audio",
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Telegram Trigger').item.json.callback_query.data }}",
+                    "rightValue": "caso1",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "d248aa1e-0a3e-4e92-aa46-9f15ccf4eb39"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "011fac5a-0ff1-4c83-bd72-1d546662d5be",
+                    "leftValue": "={{ $('Telegram Trigger').item.json.callback_query.data }}",
+                    "rightValue": "caso2",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "0eb7fa68-df9b-4e0d-bb03-0f2a44b0ad21",
+                    "leftValue": "={{ $('Telegram Trigger').item.json.callback_query.data }}",
+                    "rightValue": "caso3",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "0f03dd70-c747-47bb-be84-00334d571b1a",
+                    "leftValue": "={{ $('Telegram Trigger').item.json.callback_query.data }}",
+                    "rightValue": "caso4",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        688,
+        448
+      ],
+      "id": "edfa7327-88b9-4fb9-ae09-c4da8e50b926",
+      "name": "Botao Apertado"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.voice !== undefined || $json.message.audio !== undefined }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    },
+                    "id": "410448ac-3119-4d3f-bfbb-05997789d28e"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Audio"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "48927e6b-45cd-46eb-826b-b32d54de182b",
+                    "leftValue": "={{ $json.message.photo !== undefined }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Foto"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "85443848-cb48-4a78-8c90-d7af7dab6f0d",
+                    "leftValue": "={{ $json.callback_query !== undefined }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Botao"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "9d6ad059-691f-4436-8d7e-144b2bdc59d2",
+                    "leftValue": "={{ $json.message.text !== undefined }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Texto"
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -1728,
+        576
+      ],
+      "id": "8a43842d-8a33-4746-8c5d-cf4579c83df5",
+      "name": "Tipo de Mensagem"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "084d3405-c493-4ae7-9bca-164339fe693f",
+                    "leftValue": "={{ $json.intencao }}",
+                    "rightValue": "saudacao",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Saudação"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "29887b3a-d39a-4518-8e70-871897562e13",
+                    "leftValue": "={{ $json.intencao }}",
+                    "rightValue": "duvida",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Dúvida"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "8b853c90-2a2c-4915-b360-2ad84a3d1e47",
+                    "leftValue": "={{ $json.intencao }}",
+                    "rightValue": "bobeira",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Bobeira"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        1664,
+        -128
+      ],
+      "id": "f9bf8836-6ebf-4592-b5dc-9ba4655708d5",
+      "name": "Qual Intencao"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "={{ $('Parsear Dados Usuário').item.json.text }}"
+            },
+            {
+              "role": "system",
+              "content": "Você é Francesca Liddy, secretária do Saul Goodman. Mantenha tom profissional-sério (isso é negócio sério), mas COM A PERSONALIDADE DELA. Seca, impaciente, nada de saudações bobas.\n\nUm cliente quer registrar danos do voo 515 (Wayfarer).\n\nVocê acabou de passar as instruções para ele enviar as informações:\n\n- Uma foto dos destroços + legenda com TODOS os dados na legenda da foto\n- Nome completo, endereço, telefone, local exato do impacto, resumo do ocorrido, bens danificados\n- Tudo numa única mensagem. Sem áudio, sem separar, sem incompleto. Tudo junto ou será ignorado.\n\nMas o cliente não mandou a foto, só uma mensagem. Peça para ele enviar a foto de verdade agora.\n\nPode ser mais direta e com tom de \"você tá wasting my time com qualquer coisa errada\". Sem emojis. Parágrafo único."
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        1168,
+        1728
+      ],
+      "id": "47fe80c0-7d5e-4223-83a1-8bdac60588a8",
+      "name": "Solicitar Foto Novamente",
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Parsear Dados Usuário').item.json.id }}",
+        "text": "={{ $json.output[0].content[0].text }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1456,
+        1728
+      ],
+      "id": "73be4bf0-fa44-47cc-b864-053ea1a410b7",
+      "name": "Enviar Mensagem Solicitando Foto",
+      "webhookId": "4affd7a0-1173-4a8f-b529-d0b394732f41",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_TELEGRAM_CREDENTIAL_ID",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "b14dfe8a-b52c-4728-b359-6050eb08a296",
+              "leftValue": "={{ $('Parsear Dados Usuário').item.json.type === \"foto\" }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        944,
+        1616
+      ],
+      "id": "07f21eb3-0ed9-4a5c-b6fb-39eea5f8a721",
+      "name": "If enviou foto"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "={{ $json.output[0].content[0].text }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1232,
+        736
+      ],
+      "id": "3264cd2e-93f5-4323-90a5-afeb160a3da2",
+      "name": "Ignorar",
+      "webhookId": "3dbbb961-79e4-4955-b821-f57bf9b7e58a",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_TELEGRAM_CREDENTIAL_ID",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "role": "system",
+              "content": "Você é Francesca Liddy. O telefone não para, você tem mais o que fazer, e acabou de ler uma mensagem completamente inútil.\n\nSeu trabalho: cortar a conversa fiada de forma seca, rápida e irritada. 2-3 frases, máximo. Nada de listas, nada de explicações. Tipo falando pro lado enquanto atende 5 ligações.\n\nMostre que você não tem paciência. Cite coisas que você tá fazendo de verdade (telefones tocando, policiais na sala, papelada do voo 515, etc)."
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {
+          "maxTokens": 150
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        -1488,
+        736
+      ],
+      "id": "5dc8ccad-d08b-4283-9cb2-143d4a919ac8",
+      "name": "Ignorar Bobeira",
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "role": "system",
+              "content": "Você é Francesca Liddy, secretária do Saul Goodman. Mantenha tom profissional-sério (isso é negócio sério), mas COM A PERSONALIDADE DELA. Seca, impaciente, nada de saudações bobas.\n\nVocê acabou de receber uma foto do nada, sem pedir, sem querer saber, apenas informe que não está nem aí.\n\nPode ser mais direta e com tom de \"você tá wasting my time com qualquer coisa errada\". Sem emojis. Parágrafo único."
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        -1216,
+        1152
+      ],
+      "id": "6c09b01e-79af-4c1c-ae27-2e6caa58b8b0",
+      "name": "Tratar Foto Não Solicitada",
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAi account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Tipo de Mensagem",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Classificador": {
+      "main": [
+        [
+          {
+            "node": "Parser Classificação",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apresentação Francesca": {
+      "main": [
+        [
+          {
+            "node": "Mostrar Botões",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tirando Dúvida": {
+      "main": [
+        [
+          {
+            "node": "Mostrar Botões",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respondendo Bobeira": {
+      "main": [
+        [
+          {
+            "node": "Mostrar Botões",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parser Classificação": {
+      "main": [
+        [
+          {
+            "node": "Qual Intencao",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Classificador",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Botao Apertado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mostrar Botões": {
+      "main": [
+        []
+      ]
+    },
+    "Verificar ID na planilha": {
+      "main": [
+        [
+          {
+            "node": "If ID não está na planilha",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cadasatra na Planilha": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verifica Status Idle": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Continuar Casos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Continuar Casos": {
+      "main": [
+        [
+          {
+            "node": "Copiar Template 1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If enviou foto",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Enviar Transcricao de áudio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Solicitando conteúdo Notificação Extrajudicial": {
+      "main": [
+        [
+          {
+            "node": "Enviar Solicitacao de Conteudo",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Atualizar Status para aguardando_caso1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Solicitando conteúdo Desastre Aéreo": {
+      "main": [
+        [
+          {
+            "node": "Enviar Solicitacao de Conteudo",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Atualizar Status para aguardando_caso2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If ID não está na planilha": {
+      "main": [
+        [
+          {
+            "node": "Cadasatra na Planilha",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Verifica Status Idle",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parsear Dados Usuário": {
+      "main": [
+        [
+          {
+            "node": "Verificar ID na planilha",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preencher Relato": {
+      "main": [
+        [
+          {
+            "node": "GET Conteudo Relato",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Copiar Template 1": {
+      "main": [
+        [
+          {
+            "node": "Atualizar Notificacao Extrajudicial",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Baixar Notificacao Extrajudicial": {
+      "main": [
+        [
+          {
+            "node": "Compartilhar Notificacao Extrajudicial",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Atualizar Notificacao Extrajudicial": {
+      "main": [
+        [
+          {
+            "node": "Baixar Notificacao Extrajudicial",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compartilhar Notificacao Extrajudicial": {
+      "main": [
+        [
+          {
+            "node": "Frase Aleatoria Notificacao Extrajudicial",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Frase Aleatoria Notificacao Extrajudicial": {
+      "main": [
+        [
+          {
+            "node": "Enviar Link Notificacao Extrajudicial",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar Documento Notificacao Extrajudicial": {
+      "main": [
+        [
+          {
+            "node": "Atualizar Status para Idle",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar Link Notificacao Extrajudicial": {
+      "main": [
+        [
+          {
+            "node": "Enviar Documento Notificacao Extrajudicial",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parsear Dados do Relato": {
+      "main": [
+        [
+          {
+            "node": "Copiar Template 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Copiar Template 2": {
+      "main": [
+        [
+          {
+            "node": "Gerar Numero de Caso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Frase Aleatoria Relato": {
+      "main": [
+        [
+          {
+            "node": "Enviar Link Relato",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compartilhar Relato": {
+      "main": [
+        [
+          {
+            "node": "Frase Aleatoria Relato",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Baixar Relato": {
+      "main": [
+        [
+          {
+            "node": "Compartilhar Relato",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar Link Relato": {
+      "main": [
+        [
+          {
+            "node": "Enviar Documento Relato",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar Documento Relato": {
+      "main": [
+        [
+          {
+            "node": "Atualizar Status para Idle",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verificar Status User na Planilha": {
+      "main": [
+        [
+          {
+            "node": "If Status aguardando_caso2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Status aguardando_caso2": {
+      "main": [
+        [
+          {
+            "node": "Baixar Foto",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Tratar Foto Não Solicitada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Baixar Foto": {
+      "main": [
+        [
+          {
+            "node": "Upar Foto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upar Foto": {
+      "main": [
+        [
+          {
+            "node": "Tornar Foto Publica",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parsear Documento": {
+      "main": [
+        [
+          {
+            "node": "Inserir Foto no Documento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET Conteudo Relato": {
+      "main": [
+        [
+          {
+            "node": "Parsear Documento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Inserir Foto no Documento": {
+      "main": [
+        [
+          {
+            "node": "Baixar Relato",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tornar Foto Publica": {
+      "main": [
+        [
+          {
+            "node": "Parsear Dados Usuário",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ler G1": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Gerar títulos e Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gerar títulos e Prompt": {
+      "main": [
+        [
+          {
+            "node": "Filtrar Noticias",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filtrar Noticias": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Enviar Boletim de Desgracas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar Solicitacao de Conteudo": {
+      "main": [
+        []
+      ]
+    },
+    "Solicitando áudio para transcrição": {
+      "main": [
+        [
+          {
+            "node": "Atualizar Status para aguardando_audio",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Enviar Solicitacao de Conteudo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar Transcricao de áudio": {
+      "main": [
+        [
+          {
+            "node": "Atualizar Status para Idle",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gerar Numero de Caso": {
+      "main": [
+        [
+          {
+            "node": "Preencher Relato",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Identificar Campos": {
+      "main": [
+        [
+          {
+            "node": "Parsear Dados do Relato",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Informar Geracao de Boletim": {
+      "main": [
+        [
+          {
+            "node": "Ler G1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Baixar Audio": {
+      "main": [
+        [
+          {
+            "node": "Transcrever Audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcrever Audio": {
+      "main": [
+        [
+          {
+            "node": "Parsear Dados Usuário",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Botao Apertado": {
+      "main": [
+        [
+          {
+            "node": "Solicitando conteúdo Notificação Extrajudicial",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Solicitando conteúdo Desastre Aéreo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Informar Geracao de Boletim",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Solicitando áudio para transcrição",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tipo de Mensagem": {
+      "main": [
+        [
+          {
+            "node": "Baixar Audio",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Verificar Status User na Planilha",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Parsear Dados Usuário",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Parsear Dados Usuário",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ignorar Bobeira",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [],
+        []
+      ]
+    },
+    "Qual Intencao": {
+      "main": [
+        [
+          {
+            "node": "Apresentação Francesca",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Tirando Dúvida",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respondendo Bobeira",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Solicitar Foto Novamente": {
+      "main": [
+        [
+          {
+            "node": "Enviar Mensagem Solicitando Foto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If enviou foto": {
+      "main": [
+        [
+          {
+            "node": "Identificar Campos",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Solicitar Foto Novamente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ignorar Bobeira": {
+      "main": [
+        [
+          {
+            "node": "Ignorar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tratar Foto Não Solicitada": {
+      "main": [
+        [
+          {
+            "node": "Ignorar Foto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "d231fb51-9a87-4e25-99bd-5e271beb90ea",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "YOUR_INSTANCE_ID"
+  },
+  "id": "18sD5HPqwsbxrEWU",
+  "tags": []
+}
