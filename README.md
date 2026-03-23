@@ -164,4 +164,4 @@ Crie uma planilha Google Sheets com uma aba chamada `estados` contendo as coluna
 ## 👤 Autor
 
 **Emanuel Lucas Nogueira da Silva**  
-[LinkedIn](https://linkedin.com/in/seu-perfil) · [GitHub](https://github.com/seu-usuario)
+[LinkedIn](https://www.linkedin.com/in/emanuel-nogueira-a2b9b2232/) · [GitHub](https://github.com/1nogueirae)
