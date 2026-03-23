@@ -2,7 +2,7 @@
 
 > *"Aqui é a Francesca, do escritório do Saul Goodman. Escolha uma opção e faça isso rápido."*
 
-Bot no Telegram com persona de IA construído com **n8n**, **OpenAI** e **Google Workspace**, desenvolvido como projeto de processo seletivo para vaga de estágio em automação low-code.
+Bot no Telegram com persona de IA construído com **n8n**, **OpenAI** e **Google Workspace**.
 
 O bot assume a personalidade de **Francesca Liddy**, a secretária cínica e impaciente da série *Better Call Saul*, oferecendo uma experiência de usuário única e memorável enquanto executa automações reais de documentos.
 
