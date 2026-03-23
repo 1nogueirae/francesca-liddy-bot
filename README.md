@@ -2,7 +2,7 @@
 
 > *"Aqui é a Francesca, do escritório do Saul Goodman. Escolha uma opção e faça isso rápido."*
 
-Bot no Telegram com persona de IA construído com **n8n**, **OpenAI** e **Google Workspace**.
+Bot no Telegram com persona de IA construído com **n8n**, **OpenAI** e **Google Workspace**, desenvolvido como projeto de processo seletivo para vaga de estágio em automação low-code.
 
 O bot assume a personalidade de **Francesca Liddy**, a secretária cínica e impaciente da série *Better Call Saul*, oferecendo uma experiência de usuário única e memorável enquanto executa automações reais de documentos.
 
@@ -10,7 +10,7 @@ O bot assume a personalidade de **Francesca Liddy**, a secretária cínica e imp
 
 ## 📐 Arquitetura Macro
 
-![Arquitetura Macro](./assets/Arquitetura Macro.jpg)
+![Arquitetura Macro](./assets/Arquitetura_Macro.jpg)
 
 ---
 
@@ -121,15 +121,43 @@ francesca-liddy-bot/
 1. Acesse sua instância do n8n
 2. Vá em **Workflows → Import from file**
 3. Importe `Francesca_Liddy.json` e `Francesca_Liddy_Resetar_Status.json`
-4. Configure as credenciais:
-   - Telegram Bot API
-   - Google Sheets OAuth2
-   - Google Drive OAuth2
-   - Google Docs OAuth2
-   - OpenAI API Key
+4. Configure as credenciais conforme a seção abaixo
 5. Ative os dois workflows
 
 > **Nota:** O bot foi desenvolvido e testado em instância n8n self-hosted via Docker em VPS DigitalOcean. Atualmente pausado por questões de custo de infraestrutura.
+
+---
+
+## 🔑 Configuração de Credenciais
+
+Os arquivos JSON dos workflows foram sanitizados para publicação — todas as credenciais e IDs sensíveis foram substituídos por placeholders. Antes de usar, você precisará substituí-los pelos seus próprios valores.
+
+### Placeholders nos JSONs e o que configurar
+
+| Placeholder | O que é | Onde obter |
+|---|---|---|
+| `YOUR_TELEGRAM_CREDENTIAL_ID` | Token do bot no Telegram | [@BotFather](https://t.me/BotFather) no Telegram |
+| `YOUR_GOOGLE_SHEETS_CREDENTIAL_ID` | OAuth2 do Google Sheets | [Google Cloud Console](https://console.cloud.google.com) |
+| `YOUR_GOOGLE_DRIVE_CREDENTIAL_ID` | OAuth2 do Google Drive | [Google Cloud Console](https://console.cloud.google.com) |
+| `YOUR_GOOGLE_DOCS_CREDENTIAL_ID` | OAuth2 do Google Docs | [Google Cloud Console](https://console.cloud.google.com) |
+| `YOUR_OPENAI_CREDENTIAL_ID` | Chave de API da OpenAI | [platform.openai.com](https://platform.openai.com) |
+| `YOUR_SPREADSHEET_ID` | ID da planilha Google Sheets de controle de sessão | ID na URL da planilha: `docs.google.com/spreadsheets/d/`**`SEU_ID`**`/edit` |
+| `YOUR_INSTANCE_ID` | ID da instância n8n | Gerado automaticamente pelo n8n — pode ignorar |
+
+### APIs do Google que precisam estar ativadas
+
+No [Google Cloud Console](https://console.cloud.google.com), ative as seguintes APIs no seu projeto:
+- Google Drive API
+- Google Docs API
+- Google Sheets API
+
+### Estrutura da planilha de controle de sessão
+
+Crie uma planilha Google Sheets com uma aba chamada `estados` contendo as colunas:
+
+| chat_id | status | updated_at |
+|---|---|---|
+| (preenchido automaticamente) | (preenchido automaticamente) | (preenchido automaticamente) |
 
 ---
 
